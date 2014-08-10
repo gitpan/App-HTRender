@@ -1,0 +1,10 @@
+Revision history for Perl extension Httool.
+
+0.02  Sun Aug 10 15:26:20 2014
+	- Added --config option for HTML::Template configurability.
+	- Renamed ht_render.pl to ht_render.
+	- Added POD documentation to App::HTRender.
+	- Added GitHub metadata to Makefile.PL.
+0.01
+	- Initial release.
+

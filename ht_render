@@ -1,0 +1,137 @@
+#!/usr/bin/env perl
+
+use 5.010;
+use strict;
+use warnings;
+use Getopt::Long;
+use File::Basename ();
+use Data::Dumper;
+
+use HTML::Template;
+use JSON::Tiny qw(decode_json);
+$JSON::Tiny::TRUE  = 1;
+$JSON::Tiny::FALSE = 0;
+
+use App::HTRender;
+
+our $VERSION = '0.02_3270';
+
+our $Template_File = '';
+our $Values_File   = '';
+our $Output_File   = '';
+our $Config_File   = '';
+our $OPT_VERSION   = 0;
+our $OPT_DEBUG     = 0;
+our $OPT_QUIET     = 0;
+
+GetOptions(
+	"template=s" => \$Template_File,
+	"conf=s"     => \$Config_File,
+	"V|values=s" => \$Values_File,
+	"output=s"   => \$Output_File,
+	"version"    => \$OPT_VERSION,
+	"debug"      => \$OPT_DEBUG,
+	"quiet"      => \$OPT_QUIET,
+);
+
+if ($OPT_VERSION) {
+	print "App::HTRender version ",App::HTRender->VERSION,"\n";
+	exit(0);
+}
+
+
+# config
+my $config;
+my $config_json;
+if ($Config_File) {
+	eval {
+		local $/;		
+		open(my $cf, '<', $Config_File) or die($!);
+		$config_json = <$cf>;
+		close $cf;
+		$config = decode_json($config_json);
+		1;
+	} or do {
+		my $E = $@;
+		print STDERR "ERROR loading config file: $E";
+		exit(1);
+	};
+	print "Config file ", File::Basename::basename($Config_File)," loaded.\n" unless $OPT_QUIET;
+	print "Config options:\n", Dumper($config),"\n" if $OPT_DEBUG;
+}
+
+# template
+my $t;
+eval {
+	if ($Config_File) {
+		# create template file with config from config file
+		$t = HTML::Template->new(
+			filename => $Template_File,
+			(%$config),
+		);
+	} else {
+		# create template object with defaults
+		$t = HTML::Template->new(
+			filename          => $Template_File,
+			die_on_bad_params => 0,
+			loop_context_vars => 1,
+		);
+	}
+	1;
+} or do {
+	my $E = $@;
+	print STDERR "ERROR loading template: $E";
+	exit(1);
+};
+print "Template ",File::Basename::basename($Template_File)," loaded.\n" unless $OPT_QUIET;
+
+
+# values
+my $json;
+eval {
+	local $/;		
+	open(my $jf, '<', $Values_File) or die($!);
+	$json = <$jf>;
+	close $jf;
+	1;
+} or do {
+	my $E = $@;
+	print STDERR "ERROR loading values file: $E";
+	exit(1);
+};
+print "Values file ",File::Basename::basename($Values_File)," loaded.\n" unless $OPT_QUIET;
+
+my $v;
+eval {
+	$v = decode_json($json);
+	1; 
+} or do {
+	my $E = $@;
+	print STDERR "ERROR parsing values: $E";
+	exit(1);
+}; 
+print "Values parsed.\n" unless $OPT_QUIET;
+print "Values parsed:\n", Dumper($v),"\n" if $OPT_DEBUG;
+
+# fill values into template
+foreach (keys %$v) {
+	print "Filling in template parameter:  $_\n" if $OPT_DEBUG;
+	$t->param($_ => $v->{$_});
+}
+
+
+# dump result into output
+eval {
+	open(my $out, '>', $Output_File) or die($!);
+	print $out $t->output();
+	close $out;
+	1;
+} or do {
+	my $E = $@;
+	print STDERR "ERROR rendering output: $E";
+	exit(1);	
+};
+print "Output file ",File::Basename::basename($Output_File)," rendered.\n" unless $OPT_QUIET;
+
+# done!
+exit(0);
