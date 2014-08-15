@@ -6,13 +6,14 @@ WriteMakefile(
     NAME              => 'App::HTRender',
     VERSION_FROM      => 'lib/App/HTRender.pm', # finds $VERSION
     AUTHOR            => 'Andrew Johnson <lajandy at cpan dotorg>',
-    LICENSE           => 'perl',
+    LICENSE           => 'artistic_2',
     
     PREREQ_PM         => {
     						HTML::Template => 2.90,
     						JSON::Tiny     => 0.49,
     						Getopt::Long   => 2.37,
     						File::Basename => 2.76,
+    						Pod::Usage     => 1.35,
                          }, # e.g., Module::Name => 1.1
 	EXE_FILES         => ['ht_render'],
 	INST_SCRIPT       => 'bin',
@@ -27,7 +28,7 @@ WriteMakefile(
 				'meta-spec' => { version => 1.4 },
 				resources => 
 				{
-					repository => 'git://github.com/logicalhelion/htrender.git',
+					repository => 'git://github.com/lajandy/htrender.git',
 				},
 			},    	
     	) 

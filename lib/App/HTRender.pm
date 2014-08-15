@@ -4,7 +4,7 @@ use 5.010;
 use strict;
 use warnings;
 
-our $VERSION = '0.02_3270';
+our $VERSION = '0.03_3320';
 
 
 # Preloaded methods go here.
@@ -86,17 +86,17 @@ Displays the application version.
 
 L<HTML::Template>, L<JSON::Tiny>
 
-=head1 AUTHOR
-
-Andrew Johnson, E<lt>lajandy at cpan dot orgE<gt>
-
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2014 by Logical Helion, LLC.
+Copyright (C) 2014 by Andrew Johnson.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself, either Perl version 5.10.0 or,
-at your option, any later version of Perl 5 you may have available.
+This library is free software; you can redistribute it and/or modify it under 
+the terms of the Artistic License 2.0.  See the included LICENSE file for 
+details.
+
+=head1 WARRANTY
+
+This software comes with no warranty of any kind.
 
 
 =cut

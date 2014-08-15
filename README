@@ -1,4 +1,4 @@
-App::HTRender version 0.01
+App::HTRender version 0.03
 ==========================
 
 A command line tool to work with HTML::Template templates without 
@@ -22,10 +22,12 @@ This module requires these other modules and libraries:
 
 COPYRIGHT AND LICENSE
 
-Copyright (C) 2014 by Logical Helion, LLC.
+Copyright (C) 2014 by Andrew Johnson.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself, either Perl version 5.10.0 or,
-at your option, any later version of Perl 5 you may have available.
+This library is free software; you can redistribute it and/or modify it under 
+the terms of the Artistic License 2.0.  See the included LICENSE file for 
+details.
 
+WARRANTY
 
+This software comes with no warranty of any kind.

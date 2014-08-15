@@ -1,5 +1,8 @@
 Revision history for Perl extension Httool.
 
+0.03_3320  Tue Aug 12 23:50:59 2014
+	- Added --help option and copied POD to ht_render.
+	- Updated copyright, license, and repository information.
 0.02  Sun Aug 10 15:26:20 2014
 	- Added --config option for HTML::Template configurability.
 	- Renamed ht_render.pl to ht_render.
