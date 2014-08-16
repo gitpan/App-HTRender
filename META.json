@@ -40,11 +40,11 @@
          }
       }
    },
-   "release_status" : "testing",
+   "release_status" : "stable",
    "resources" : {
       "repository" : {
          "url" : "git://github.com/lajandy/htrender.git"
       }
    },
-   "version" : "0.03_3320"
+   "version" : "1.00"
 }

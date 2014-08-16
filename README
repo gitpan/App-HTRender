@@ -1,4 +1,4 @@
-App::HTRender version 0.03
+App::HTRender version 1.00
 ==========================
 
 A command line tool to work with HTML::Template templates without 
@@ -24,9 +24,9 @@ COPYRIGHT AND LICENSE
 
 Copyright (C) 2014 by Andrew Johnson.
 
-This library is free software; you can redistribute it and/or modify it under 
-the terms of the Artistic License 2.0.  See the included LICENSE file for 
-details.
+This library is free software; you can redistribute it and/or modify 
+it under the terms of the Artistic License 2.0.  See the included 
+LICENSE file for details.
 
 WARRANTY
 
